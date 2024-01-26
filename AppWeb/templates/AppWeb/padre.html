@@ -17,7 +17,7 @@
         <link href="{% static 'AppWeb/css/styles.css' %}" rel="stylesheet" />
     </head>
     <body id="page-top">
-        <!-- Navigation-->
+        <!-- Navigation -------- acá está los Botones para navegar-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
@@ -30,6 +30,9 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'item' %}">Items</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cliente' %}">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'prov' %}">Proveedores</a></li>
+                        <li class="btn btn-primary"><a class="nav-link" href="{% url 'Login' %}">Iniciar Sesion</a></li>
+                        <li class="btn btn-primary"><a class="nav-link" href="{% url 'SignUp' %}">Registrarse</a></li>
+                        <li class="btn btn-primary"><a class="nav-link" href="{% url 'Logout' %}">Cerrar Sesion</a></li>
                     </ul>
                 </div>
             </div>

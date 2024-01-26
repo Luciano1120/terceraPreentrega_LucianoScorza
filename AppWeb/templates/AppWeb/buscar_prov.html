@@ -7,19 +7,18 @@
 </head>
 <body>
     
-    <h1> Buscamos Proveedores </h1>
+    <h1> Buscamos Proveedores </h1>  <!-- es lo q aparece como head del HTML-->
 
-    <form action="/AppWeb/resultprov/" method="GET">
+    <form action="/AppWeb/resultprov/" method="GET">  <!-- el action permite a donde me va a redireccionar luego del submit  -->
+        
         Ingresa el Prov:    <input type="text" name="nombr"> <!-- name debe machear con prov_pedido=request.GET['nombr'] de views-->
+        
         <input type="submit" value="Buscar">
 
 
     </form>
     
-     {% for x in provs %}>
-    <p>{{x.nombre}}</p>
-    {% endfor %} 
-
+    
 
 </body>
 </html>

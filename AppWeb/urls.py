@@ -4,6 +4,7 @@ from django.urls import path
 from AppWeb.views import *
 
 
+
 urlpatterns = [
     path("", inicio, name='inicio'),  #con solo poner http://127.0.0.1:8000/AppWeb/ ya sale 
     
@@ -14,12 +15,25 @@ urlpatterns = [
 
     path("pruebas/", prueba),
 
-    #para nuevos datos
-    path("nuevoprov/", agregar_prov),
-
+    
     #para buscar datos
     path("buscaprov/", buscar_prov),
     path("resultprov/", resul_prov),
 
+    #CRUD Proveedores
+    path("leerProv/", leer_prov),
+    
+    path("nuevoprov/", agregar_prov),
+
+    
+    path("elimProv/<provNombre>", eliminar_prov, name="EliminarProv"),  #<provNombre> es el parametro q pide la vista q se pasa en el HTML--el name es para linkear con el buton, es decir para q dicha URL pueda ser llamada desde un Boton
+
+    path("editProv/<provNombre>", editarProv, name="EditarProv"),
+
+    #login
+    path("login/", inicioSesion, name="Login") , 
+    path("registro/", registro, name="SignUp") , 
+
+    path("logout/", cerrarSesion, name="Logout"),  
 
 ]

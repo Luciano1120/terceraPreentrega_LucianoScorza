@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuevoProv</title>
+    <title>EditarProv</title> <!-- es el nombre del HTML q sale en la solapita del navegador -->
 </head>
 <body>
     
-    <h1> Creamos un Proveedor Nuevo  </h1>
-
     <form action="" method="POST"> {% csrf_token %}  <!-- se agrega un formulario -action es para enviar a una url desp de darle enviar pero ya se hace en la view - el metodo post permite agregar datos a la BD- se agrega token de validacion -->
 
         <table>
 
-            {{mi_formu.as_table}}  <!-- .as_table y encuadrarlo dentro de <table >permite visualizar el formulario de forma tabular-->
+            {{mi_formu.as_table}}  <!-- formu es la key del diccionario -->
 
         </table>
 
         <input type="submit" value="Guardar">  <!-- el argumento value es opcional si no sale Enviar-->
 
     </form>
+
+
 
 </body>
 </html>

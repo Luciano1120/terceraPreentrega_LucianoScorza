@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+</head>
+<body>
+    
+    
+    <p>Estamos Buscando al Proveedor: {{provs}}</p>  <!-- hacer un metodo str si no comentarlo-->
+        
+    {% for x in provs %}>    <!-- provs viene  de la view resultado prov es la key del diccionario-->
+        
+        <p>Nombre: {{x.nombre}} </p>
+        <p>Cuit: {{x.CUIT}}</p>  
+        <p>Condicion: {{x.condicion}} </p> <!-- x.nombre del atributo de la clase-->
+
+    {% endfor %} 
+
+
+</body>
+</html>

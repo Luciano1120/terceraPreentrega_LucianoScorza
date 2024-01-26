@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>Lectura de Proveedores</p>
+        
+    {% for x in Supliers %}>    <!-- Supliers viene  de la view leer_prov y es la key del diccionario-->
+    
+    
+    <button>
+        <a href="{% url 'EditarProv' x.nombre %}"> Boton Editar Proveedor</a>
+        
+
+    </button>
+
+    <button>
+        
+        <a href="{% url 'EliminarProv' x.nombre %}"> Boton Eliminar Proveedor</a> <!--la "a" del principio hace un hipervinculo, luego el Buton lo hace boton-->
+        <!-- en la url se le da el parametro a eliminar-->
+
+    </button>
+
+
+
+
+    <table> <!--   convierte en tabla el contenido-->
+        
+        Nombre: {{x.nombre}}  <!-- x.nombre del atributo de la clase-->
+        Cuit: {{x.CUIT}}  <!-- x.nombre del atributo de la clase-->
+        Condicion: {{x.condicion}}  <!-- x.nombre del atributo de la clase-->
+
+    </table>
+
+    
+
+    {% endfor %} 
+
+
+
+</body>
+</html>

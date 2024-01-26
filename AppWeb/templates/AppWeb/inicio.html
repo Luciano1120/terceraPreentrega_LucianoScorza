@@ -4,6 +4,21 @@
 
 {% block titulo %}
 
-Vista de inicio
+{{mensaje}}  <!-- variable del mensaje cuando inicia sesion-->
                         
+{% endblock %}
+
+{% block descripcion %}
+
+<form action="/AppWeb/resultprov/" method="GET">  <!-- el action permite a donde me va a redireccionar luego del submit  -->
+        
+    Ingresa el Prov:    <input type="text" name="nombr"> <!-- name debe machear con prov_pedido=request.GET['nombr'] de views-->
+    
+    <input type="submit" value="Buscar">
+
+
+</form>
+
+
+
 {% endblock %}
