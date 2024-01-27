@@ -25,3 +25,14 @@ class UsuarioRegistro(UserCreationForm):
         model = User
         fields=["username", "email", "first_name","last_name","password1","password2" ] #así los requiere django
 
+class formularioEditarUsuario(UserCreationForm):
+    email = forms.EmailField()
+    password1 = forms.CharField(label= "Contraseña", widget= forms.PasswordInput)
+    password2 = forms.CharField(label= "Repetir Contraseña", widget= forms.PasswordInput)
+
+    class Meta:
+
+        model = User
+        fields=["email", "first_name","last_name","password1","password2" ] #no requiere editar el username, ya q no es lo q se acostumbra
+
+    

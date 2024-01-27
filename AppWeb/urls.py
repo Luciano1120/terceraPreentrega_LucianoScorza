@@ -35,5 +35,6 @@ urlpatterns = [
     path("registro/", registro, name="SignUp") , 
 
     path("logout/", cerrarSesion, name="Logout"),  
+    path("editar/", editarUsuario, name="EditarUsuario"), #el profe trata de diferenciar el name del nnombre de la vista  
 
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render 
 from AppWeb.models import Proveedor, Cliente, Item # importe los modelos de models.py
-from AppWeb.forms import ProveedorFormulario, UsuarioRegistro #importe el formulario
+from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario #importe el formulario
 from django.http import HttpResponse
 
 #librerias necesarias para el manejo de sesion
@@ -59,6 +59,46 @@ def registro(request):
     
      return render(request, "AppWeb/registro.html", {"formulario":form})
     
+
+
+def editarUsuario(request):
+
+    usuario=request.user
+
+    if request.method == 'POST':
+
+        form= formularioEditarUsuario(request.POST)
+
+        if form.is_valid():
+             info= form.cleaned_data  #diccionario q contiene los datos limpios
+
+             usuario.email = info["email"]
+             usuario.set_password = info["password1"]
+             usuario.first_name = info["first_name"]
+             usuario.last_name = info["last_name"]
+
+             usuario.save()
+
+             return render (request, "AppWeb/inicio.html")
+    
+    else:
+         
+         form = formularioEditarUsuario(initial={"email": usuario.email ,
+                                        "first_name": usuario.first_name,
+                                        "last_name":usuario.last_name})
+         
+    return render (request, "AppWeb/editarUsuario.html",{"formulario" : form , "usuario": usuario})
+
+
+
+
+
+        
+
+             
+
+
+
 
 def cerrarSesion(request):
     logout(request) 
