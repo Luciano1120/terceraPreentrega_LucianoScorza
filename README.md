@@ -1,4 +1,4 @@
-# ProyectoFInal_LucianoScorza
+# ProyectoFinal_LucianoScorza
 Python con Django
 
 ## Mi Pagina Web contiene 3 Modelos
