@@ -13,7 +13,6 @@ urlpatterns = [
     path("clientes/", cliente, name='cliente'),
     path("prov/", prov, name='prov'),
 
-    path("pruebas/", prueba),
 
     
     #para buscar datos
@@ -34,7 +33,13 @@ urlpatterns = [
     path("login/", inicioSesion, name="Login") , 
     path("registro/", registro, name="SignUp") , 
 
-    path("logout/", cerrarSesion, name="Logout"),  
+    path("logout/", cerrarSesion, name="Logout"),  #name es para referenciarlo en el html padre dentro del boton
     path("editar/", editarUsuario, name="EditarUsuario"), #el profe trata de diferenciar el name del nnombre de la vista  
+
+    #acerca de mi
+    path("about/", about, name="acercaDeMi"), 
+
+    #imagenes (avatar)
+    path("agregarImagen/", agregarImagen, name="Agregar Imagen"), 
 
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User #la tenia importada de archivo forms.py y ahora tambien la necesito acá por lo q la copio
 
 # Create your models here.
 
@@ -27,3 +28,11 @@ class Proveedor(models.Model):
     nombre=models.CharField(max_length=30)
     CUIT=models.CharField(max_length =10, default='000')
     condicion=models.CharField(max_length=30)
+
+
+class avatar(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE) #lo vinculo con la Clase User, y on delete Cascade es para q si se elimina el usuario se elimine el avatar
+    imagen = models.ImageField(upload_to="avatares", null=True , blank=True) # ya q no todos los usuarios va a tener Avatares por eso null y blank = True
+
+
+

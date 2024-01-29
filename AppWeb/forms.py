@@ -1,6 +1,7 @@
 from django import forms  #se crea este archivo
 from django.contrib.auth.forms import  UserCreationForm
 from django.contrib.auth.models import User
+from  AppWeb.models import avatar
 
 #copiar el modelo y cambiar por form. se puede usar changeallocurrences
 
@@ -34,5 +35,16 @@ class formularioEditarUsuario(UserCreationForm):
 
         model = User
         fields=["email", "first_name","last_name","password1","password2" ] #no requiere editar el username, ya q no es lo q se acostumbra
+
+
+class AvatarFormulario(forms.Form):  #en vez de .Form uso .ModelForm
+
+    class Meta:
+
+        model = avatar  #es el modelo importado
+        fields=["user", "imagen"]
+
+    
+
 
     

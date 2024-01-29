@@ -1,0 +1,21 @@
+{% extends "AppWeb/padre.html" %}
+
+{%load static}
+
+
+{% block description %}
+
+<form action="" method="POST">  {% csrf_token %}
+
+    <p>
+
+    {{form.as_p}}
+
+    </p>
+
+    <input type="submit", value="Subir Imagen", style="color: red">
+
+
+</form>
+
+{% endblock %}

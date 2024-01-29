@@ -1,14 +1,17 @@
 # ProyectoFinal_LucianoScorza
-Python con Django
+Python con Django.
+Se usa la Version 5.0 de django
+Se usa la Version 3.10.5 de Python 
 
-## Mi Pagina Web contiene 3 Modelos
+Use la Rama Master
+
+## Mi Pagina Web contiene 4 Modelos
 
 1. Items
 2. Clientes
 3. Proveedores
+4. Avatar
 
-* Los 3 Botones Funcionales son Items, Clientes y Provedores donde cada uno lleva a su Url respectiva
+El CRUD se hizo con el Modelo Proveedor. 
+Permitiendo Agregar un Proveedor, leer los Proveedores Cargados, Modificar y Eliminar cada uno de ellos.
 
-* Para Crear Proveedores por medio de Formulario usar la url http://127.0.0.1:8000/AppWeb/nuevoprov/
-
-* Para Buscar Proveedores por nombre acceder por esta url http://127.0.0.1:8000/AppWeb/buscaprov/

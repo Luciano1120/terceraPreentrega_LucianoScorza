@@ -1,7 +1,6 @@
 from django.shortcuts import render 
 from AppWeb.models import Proveedor, Cliente, Item # importe los modelos de models.py
-from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario #importe el formulario
-from django.http import HttpResponse
+from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario, AvatarFormulario #importe el formulario
 
 #librerias necesarias para el manejo de sesion
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -13,7 +12,12 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-#login, register y logout
+#vista de Inicio
+def inicio (request):
+    return render(request, "AppWeb/inicio.html")
+
+
+#vista de login, register y logout
 
 def inicioSesion(request):
      
@@ -60,7 +64,7 @@ def registro(request):
      return render(request, "AppWeb/registro.html", {"formulario":form})
     
 
-
+@login_required #para q solo se puede entrar si se inicio cesion
 def editarUsuario(request):
 
     usuario=request.user
@@ -91,40 +95,55 @@ def editarUsuario(request):
 
 
 
-
-
-        
-
-             
-
-
-
-
 def cerrarSesion(request):
     logout(request) 
 
     return render (request, "appweb/logout.html")
 
+#agregar Avatares (vista para subir imagenes)
+@login_required
+def agregarImagen(request):
+     
+     if request.method == "POST":    #es decir si la doy al boton subir imagenes q  siga con esos pasos
+          
+          miFormulario=AvatarFormulario(request.POST, request.FILES)
 
-def inicio (request):
-    return render(request, "AppWeb/inicio.html")
+          if miFormulario.is_valid():
+               
+               informacion= miFormulario.cleaned_data
+               
+               avatar= avatar(user=request.user, imagen=informacion['imagen'])
+               avatar.save()
+
+               return render(request, "AppWeb/inicio.html")
+          
+     else:
+          
+              miFormulario =AvatarFormulario() #si no q me mande el Formulario Vacio
+              
+     return render(request, "AppWeb/agregarImg.html", {'form':miFormulario})
+
+
+
+
+#vistas de Clases
 
 @login_required  #impide acceder si no estoy logueado
 def prov (request):
     return render(request, "AppWeb/prov.html")
 
+@login_required
 def cliente (request):
     return render(request, "AppWeb/clientes.html")
 
+@login_required
 def item (request):
     return render(request, "AppWeb/items.html")
 
-def prueba (request):
-    return render(request, "AppWeb/form_prov.html")
 
 
-
-#para agregar datos
+#CRUD
+#Insertar datos
 def agregar_prov(request):
     nuevo_formulario=ProveedorFormulario()
     if request.method == "POST":  #si el formulario tiene el metodo post q avance
@@ -147,6 +166,17 @@ def agregar_prov(request):
 
 
 
+
+#read
+def leer_prov(request):
+
+     
+        proveedores=Proveedor.objects.all()
+        contexto= {"Supliers": proveedores}
+
+        return render(request, "AppWeb/leer_prov.html", contexto )  #en este caso guardo la variable contexto como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov
+
+#alternativa a leer
 def buscar_prov(request):
         
         return render(request, "AppWeb/buscar_prov.html")
@@ -163,15 +193,8 @@ def resul_prov(request):
     else:
         return render(request, "AppWeb/buscar_prov.html")
 
-def leer_prov(request):
 
-     
-        proveedores=Proveedor.objects.all()
-        contexto= {"Supliers": proveedores}
-
-        return render(request, "AppWeb/leer_prov.html", contexto )  #en este caso guardo la variable contexto como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov
-
-
+#delete
 def eliminar_prov(request, provNombre): #se pide por parametro el prov a eliminar
      
      prov_eliminar=Proveedor.objects.get(nombre=provNombre) #para guardar el prov a eliminar
@@ -183,6 +206,7 @@ def eliminar_prov(request, provNombre): #se pide por parametro el prov a elimina
      
      return render(request, "AppWeb/leer_prov.html", contexto)
 
+#update
 def editarProv(request, provNombre):
     nuevo_formulario=ProveedorFormulario() 
     prov_edit=Proveedor.objects.get(nombre=provNombre) 
@@ -213,6 +237,10 @@ def editarProv(request, provNombre):
 
     return render (request, "AppWeb/formEditarProv.html", {"mi_formu": nuevo_formulario, "nombre":provNombre })    
         
+
+
+def about(request):
+    return render(request, "AppWeb/about.html")     
 
 
      
