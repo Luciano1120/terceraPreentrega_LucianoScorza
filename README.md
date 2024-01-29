@@ -1,5 +1,5 @@
 # ProyectoFinal_LucianoScorza
-Python con Django
+Python con Django- Usar Rama "MASTER"
 
 ## Mi Pagina Web contiene 3 Modelos
 
