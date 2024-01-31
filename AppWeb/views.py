@@ -1,3 +1,6 @@
+from django.http import HttpResponse #lo use solo para probar la hora actual. Pero no hace falta usarlo, ya q conviene usar el render
+import datetime as dt #lo use solo para probar la hora actual
+
 from django.shortcuts import render 
 from AppWeb.models import Proveedor, Cliente, Item # importe los modelos de models.py
 from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario, AvatarFormulario #importe el formulario
@@ -11,6 +14,11 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+def hora_actual(request):  #el parametro request es obligatorio. Lo exige django en las views por más q no se use
+     ahora= dt.datetime.now()
+     mensaje= f'{ahora}'
+     return HttpResponse (mensaje)  #no hace falta una plantilla de HTML en este caso, aunque podría usar alguna y usarla como parametro en vez de mensaje(clase 18 min 1.21) /el HttpResponse solo lee strings
+
 
 #vista de Inicio
 def inicio (request):
@@ -162,7 +170,7 @@ def agregar_prov(request):
            return render(request, "AppWeb/inicio.html") #para q me lleve a la pag de inicio luego de guadar
        
 
-    return render(request, "AppWeb/form_prov.html", {"mi_formu":nuevo_formulario}) #a donde lleva la view
+    return render(request, "AppWeb/form_prov.html", {"mi_formu":nuevo_formulario}) #recibe 3 argumentos (request obligado- el html - el contexto)
 
 
 
@@ -171,16 +179,25 @@ def agregar_prov(request):
 def leer_prov(request):
 
      
-        proveedores=Proveedor.objects.all()
-        contexto= {"Supliers": proveedores}
+        proveedores=Proveedor.objects.all()  #obtengo todos los registros de la clase o modelo Proveedor. Guardo en una variable proveedores todos los registros accediendo a la clase Proveedor con el metodo .objects.all()
+        contexto= {"Supliers": proveedores} #guardo los registro en un diccionario
 
-        return render(request, "AppWeb/leer_prov.html", contexto )  #en este caso guardo la variable contexto como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov
+        return render(request, "AppWeb/leer_prov.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
 
 #alternativa a leer
 def buscar_prov(request):
         
         return render(request, "AppWeb/buscar_prov.html")
 
+#todos los Proveedores
+def todos_prov(request):
+        
+        proveedores=Proveedor.objects.all()  #obtengo todos los registros de la clase o modelo Proveedor. Guardo en una variable proveedores todos los registros accediendo a la clase Proveedor con el metodo .objects.all()
+        contexto= {"Supliers": proveedores} #guardo los registro en un diccionario
+
+        return render(request, "AppWeb/todosLosProvs.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
+
+    
 
 def resul_prov(request):
 
@@ -202,9 +219,9 @@ def eliminar_prov(request, provNombre): #se pide por parametro el prov a elimina
 
      prov_restantes=Proveedor.objects.all()
 
-     contexto= {"Supliers": prov_restantes}
+     contexto= {"Supliers": prov_restantes} 
      
-     return render(request, "AppWeb/leer_prov.html", contexto)
+     return render(request, "AppWeb/leer_prov.html", contexto) #el argumento contexto del render debe ser un diccionario, y es de la forma en q se le pasa al HTML una variable. Se le debe pasar la "Key" del diccionario como variable dentro de dobles llaves {{}} (similar al f string para leer variables dentro de cadenas de texto)
 
 #update
 def editarProv(request, provNombre):

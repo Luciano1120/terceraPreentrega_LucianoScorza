@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #mis aplicaciones
-    'AppWeb'
+    #mis aplicaciones, las tengo q agregar aquí debajo en esta lista de INSTALLED_APPS
+    'AppWeb',
 ]
 
 MIDDLEWARE = [

@@ -1,14 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Prov</title>
+    <title>Buscar Prov</title> <!-- Titulo de la solapa del navegador-->
 </head>
 <body>
     
-    <h1> Buscamos Proveedores </h1>  <!-- es lo q aparece como head del HTML-->
-
+    <h1> Buscamos Proveedores </h1>  <!-- Aparece como Etiqueta de Titulo, sale como mas destacado en Negrita y mas grande q si no lo pongo entre <h>-->
+     
     <form action="/AppWeb/resultprov/" method="GET">  <!-- el action permite a donde me va a redireccionar luego del submit  -->
         
         Ingresa el Prov:    <input type="text" name="nombr"> <!-- name debe machear con prov_pedido=request.GET['nombr'] de views-->
@@ -18,7 +19,8 @@
 
     </form>
     
-    
+    <img src="https://img.freepik.com/vector-gratis/ilustracion-concepto-empresa_114360-2581.jpg" alt="">  <!-- img permite cargar una imagen //src (source) no permite rutas locales -- alt es mensaje alternativo/ ver alternativa de como hacerlo con alguna ruta local-->
+
 
 </body>
 </html>

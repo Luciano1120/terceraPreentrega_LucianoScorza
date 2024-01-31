@@ -4,9 +4,10 @@ from django.contrib.auth.models import User #la tenia importada de archivo forms
 # Create your models here.
 
 #creo 3 modelos-- desde esta linea lo hago yo
+#los modelos se vinculan a la BD
 class Item(models.Model):
 
-    id=models.IntegerField
+    id=models.IntegerField  #el campo de nombre id lo identifica como PK no debe ponerse () luego de intergerfield, si fuera otro campo si se pondría()- Ver el error q sale: AppWeb.Item: (models.E004) 'id' can only be used as a field name if the field also sets 'primary_key=True'.
     nombre=models.CharField(max_length=30)
     categoria=models.CharField(max_length=15)
     #foto=models.ImageField (ver de agregar este campo cuando vea el resumen de carga de foto)
@@ -17,6 +18,7 @@ class Cliente(models.Model):
     id=models.IntegerField
     nombre=models.CharField(max_length=30)
     CUIT=models.CharField(max_length =10, default='000')  #este campo lo agregué después y necesita un valor por default una vez creado el modelo
+    #si se agrega un campo nuevo voy a tener q hacer siempre las makemigrations y migrate, pero darle un valor por default
 
 class Proveedor(models.Model):
 

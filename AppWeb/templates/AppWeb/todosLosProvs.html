@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1> Todos los Proveedores </h1>  <!-- Aparece como Etiqueta de Titulo, sale como mas destacado en Negrita y mas grande q si no lo pongo entre <h>-->
+        
+        {% for x in Supliers %}>    <!-- Supliers viene  de la view leer_prov y es la key del diccionario-->
+    
+        {{x.nombre}}
+        
+        {% endfor %}     
+
+
+</body>
+</html>

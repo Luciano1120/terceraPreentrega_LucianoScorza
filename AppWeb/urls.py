@@ -8,16 +8,19 @@ from AppWeb.views import *
 urlpatterns = [
     path("", inicio, name='inicio'),  #con solo poner http://127.0.0.1:8000/AppWeb/ ya sale 
     
+    path("ahora/",hora_actual),
+
     #para modelos
     path("items/", item, name='item'), # 1er argumento para la continuacion del path de la url- 2do toma de la view - 3ro referencia para boton HTML del padre.html
     path("clientes/", cliente, name='cliente'),
-    path("prov/", prov, name='prov'),
+    path("prov/", prov, name='prov'),  #no es obligario termina con / pero es buena practica
 
 
     
     #para buscar datos
     path("buscaprov/", buscar_prov),
     path("resultprov/", resul_prov),
+    path("todosprov/", todos_prov),
 
     #CRUD Proveedores
     path("leerProv/", leer_prov),
