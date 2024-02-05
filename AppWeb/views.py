@@ -3,7 +3,7 @@ import datetime as dt #lo use solo para probar la hora actual
 
 from django.shortcuts import render 
 from AppWeb.models import Proveedor, Cliente, Item # importe los modelos de models.py
-from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario, AvatarFormulario #importe el formulario
+from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario, AvatarFormulario #importa los formularios
 
 #librerias necesarias para el manejo de sesion
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -150,27 +150,61 @@ def item (request):
 
 
 
-#CRUD
+
+#inserta en Items Prueba simple
+def agregaItemSimpleSinForm(request):
+     item1=Item(nombre="Freezer1600", categoria="Freezer") #le paso los parametro para q complete a la BBDD cuando se plasme el url en el navegador
+     #ho hace falta pasar el ID ya q entra solo por ser PK
+     item1.save()
+     return render (request, "AppWeb/agregaItemSimpleSinForm.html")
+
+
+def agregaItemConForm(request):
+# formulario con HTML     
+     #item2=""
+     if request.method == "POST":  #si no agrego este condicional cada vez q quiera hacer un POST da error
+                          #es decir si hace click en el submit q avance con la ejecucion del codigo  
+     
+        item2=Item(
+             nombre = request.POST["nombre"],
+             categoria = request.POST["categoria"]
+             )
+     #tal cual la view de arriba acá le doy los parametros a traves de los nombres q le di a a los imput de las caja de texto
+
+        item2.save()    
+
+     return render (request, "AppWeb/agregaItemConForm.html")
+
+
+
+#CRUD Provedores
 #Insertar datos
+#se hace con formularios de django y no como hicimos de Items arriba
 def agregar_prov(request):
     nuevo_formulario=ProveedorFormulario()
-    if request.method == "POST":  #si el formulario tiene el metodo post q avance
+    if request.method == "POST":  #si le damos click al boton de submit q avance
 
-       nuevo_formulario=ProveedorFormulario(request.POST)
+       nuevo_formulario=ProveedorFormulario(request.POST) #con esta linea obtenemos los datos del formulario  HTML
 
-       if nuevo_formulario.is_valid():
+       if nuevo_formulario.is_valid():  #verificamos q los datos del formualario sean validos. Tipos de datos por ejemplo, si hay datos vacio, y no tengo el error q me da el agregaItemConForm q no se por que no entra en la BD
            
-           info=nuevo_formulario.cleaned_data  #define a info como un diccionario
+           info=nuevo_formulario.cleaned_data  #define a info como un diccionario, y q venga limpia
            
-           prov_nuevo=Proveedor(nombre=info["nombre"],condicion=info["condicion"], CUIT=info["CUIT"]) #para los value tomo los nombres de la clase form y para las Key me dio error cuando lo puse en Minuscula por lo q debe tomar del nombre del  Modelo
-           #esta sentencia llena a la base de datos del Modelo Proveedor asignando de forma forzoza nombre de la clase modelo = argumento del diccionario del formulario
+           prov_nuevo=Proveedor(nombre=info["nombre"],condicion=info["condicion"], CUIT=info["CUIT"]) 
+           #esta sentencia llena a la base de datos (Modelo Proveedor) asignando de forma forzoza nombre de la clase modelo = argumento del diccionario del formulario
+           #para el diccionario info se ponen las key q son los Atributos del Formulario
+           
 
            prov_nuevo.save()
 
-           return render(request, "AppWeb/inicio.html") #para q me lleve a la pag de inicio luego de guadar
-       
+           return render(request, "AppWeb/inicio.html") #para q me lleve a la pag de inicio luego de guardar- a esta pagina me lleva luego de guardar, la q está debajo es donde me ubico antes
+        
+        #no me hace falta este else para q cuando se ubique en la url aparezca vacio el formulario
+        #else: 
+         #   nuevo_formulario=ProveedorFormulario() """
 
-    return render(request, "AppWeb/form_prov.html", {"mi_formu":nuevo_formulario}) #recibe 3 argumentos (request obligado- el html - el contexto)
+    return render(request, "AppWeb/agregaProv.html", {"mi_formu":nuevo_formulario}) #recibe 3 argumentos (request obligado- el html - el contexto (permite la vinculacion con el HTML))
+    #este return es donde me situa el navegador cuando se llama a la vista desde la url
 
 
 
@@ -184,12 +218,9 @@ def leer_prov(request):
 
         return render(request, "AppWeb/leer_prov.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
 
-#alternativa a leer
-def buscar_prov(request):
-        
-        return render(request, "AppWeb/buscar_prov.html")
 
-#todos los Proveedores
+
+#muestro a todos los Proveedores
 def todos_prov(request):
         
         proveedores=Proveedor.objects.all()  #obtengo todos los registros de la clase o modelo Proveedor. Guardo en una variable proveedores todos los registros accediendo a la clase Proveedor con el metodo .objects.all()
@@ -198,17 +229,23 @@ def todos_prov(request):
         return render(request, "AppWeb/todosLosProvs.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
 
     
-
+#alternativa a leer-----------------------------
+def buscar_prov(request):
+        
+        return render(request, "AppWeb/buscar_prov.html")
+#Complementa a buscar_prov
 def resul_prov(request):
 
-    if request.method=='GET':
+    if request.method=='GET':  #si se le hace click al boton buscar q siga dentro del if
 
-        prov_pedido=request.GET['nombr']
-        resul_prov=Proveedor.objects.filter(nombre__icontains=prov_pedido) #si quiero busqueda exacta reemplazar icontains x iexact
+        prov_pedido=request.GET['nombr']  #guardamos en una variable en valor de la cajita de texto del formulario
+        resul_prov=Proveedor.objects.filter(nombre__icontains=prov_pedido) #para filtrar lo q pidio el usuario en la variable de arriba - si quiero busqueda exacta reemplazar icontains x iexact
 
-        return render(request, "AppWeb/result_busqueda_prov.html", {"provs":resul_prov} )  #provs viene de la plantilla resultado_busqueda..
+        return render(request, "AppWeb/result_busqueda_prov.html", {"provs":resul_prov} )  #provs es lo que le paso a la plantilla HTML para q muestre los datos
     else:
         return render(request, "AppWeb/buscar_prov.html")
+
+#----------------------------------------------------------------------
 
 
 #delete

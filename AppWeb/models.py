@@ -7,7 +7,8 @@ from django.contrib.auth.models import User #la tenia importada de archivo forms
 #los modelos se vinculan a la BD
 class Item(models.Model):
 
-    id=models.IntegerField  #el campo de nombre id lo identifica como PK no debe ponerse () luego de intergerfield, si fuera otro campo si se pondría()- Ver el error q sale: AppWeb.Item: (models.E004) 'id' can only be used as a field name if the field also sets 'primary_key=True'.
+    id=models.IntegerField  #el campo de nombre id lo identifica como PK, por no debe ponerse () luego de intergerfield, si fuera otro campo si se pondría()- Ver el error q sale: AppWeb.Item: (models.E004) 'id' can only be used as a field name if the field also sets 'primary_key=True'.
+    #No hace falta pasar el id como parametro en el Insert ya q al ser PK entra solo
     nombre=models.CharField(max_length=30)
     categoria=models.CharField(max_length=15)
     #foto=models.ImageField (ver de agregar este campo cuando vea el resumen de carga de foto)

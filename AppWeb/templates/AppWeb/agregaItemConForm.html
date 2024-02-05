@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgregaItemConForm</title>
+</head>
+<body>
+    
+    <h1> Agregó Item </h1>
+
+    <form  action="/AppWeb/ahora/" method="POST" > {% csrf_token %} 
+<!-- el action permite q cada vez q le de al boton submit me mande a esta url cuando se hace el form con HTML, pero no es necesario completarlo ahi cuando se hace el Form con django--> 
+<!-- el method permite definir q sea un metodo "post" es decir q grabe info o "get" q lea info--> 
+<!-- el crsf_token permite darle permiso al POST--> 
+        
+
+        <p>Nombre: <input type ="text" name="nombre"> </p>  <!-- vemos q el type del imput en este caso solo acepta texto pero podría aceptar muchos otros tipos de Datos, con solo darle al igual se despliegan las opciones -->
+    <!-- el name es para vicularlo con la view-->
+        <p>Categoria: <input type ="text" name="categoria"></p>
+    <!-- Archivo <input type ="file"> <!-- te permite seleccionar un archivo del directorio-->
+    <!-- Password <input type ="password"> <!-- te permite colocar un password q esté encriptado-->
+        <input type ="submit" value="Guardar"> <!-- este tipo submit lo entiende para guardar la info del formulario, tambien existe el type="Button" pero el q se se recomienda es el submit para guardar los datos del formulario -->
+
+
+    </form>
+
+</body>
+</html>

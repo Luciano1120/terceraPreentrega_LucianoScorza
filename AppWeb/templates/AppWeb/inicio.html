@@ -1,12 +1,28 @@
 {% extends "AppWeb/padre.html" %}
 
-{%load static}
+
+<!--este bloque referenciado dentro del padre en el title de html para poder cambiar el nombre del Html q se visualiza en la solapita-->
+
+{% block title %} 
+
+inicio  
+                        
+{% endblock %}
+
 
 {% block titulo %}
 
 {{mensaje}}  <!-- variable del mensaje cuando inicia sesion-->
                         
 {% endblock %}
+
+{% block titulo2 %}
+
+Bienvenido a Mi Pagina Web
+                        
+{% endblock %}
+
+
 
 {% block descripcion %}
 

@@ -1,13 +1,15 @@
-from django import forms  #se crea este archivo
+#debemos crear este archivo con el nombre forms.py
+
+from django import forms  
 from django.contrib.auth.forms import  UserCreationForm
 from django.contrib.auth.models import User
 from  AppWeb.models import avatar
 
-#copiar el modelo y cambiar por form. se puede usar changeallocurrences
+#copiar del modelo y cambiar por form. se puede usar "changeallocurrences" q sería como un reemplazar
+#es una clase muy similar a la de modelo q me permite la carga de datos al modelo a traves de un formulario q paso al HTML para el usuario
 
+#similar a crear un modelo pero creamos acá la clase formulario
 class ProveedorFormulario(forms.Form):
-
-    
 
     id=forms.IntegerField
     nombre=forms.CharField(max_length=30)

@@ -2,8 +2,17 @@
 
 {%load static}
 
+<!--este bloque referenciado dentro del padre en el title de html para poder cambiar el nombre del Html q se visualiza en la solapita-->
+{% block title %} 
+
+items
+                        
+{% endblock %}
+
+
+
 {% block titulo %}
 
-Vista de Items
+Vista de Items  <!-- esto q pongo acá entre el block es lo q va a variar respecto del padre.html ya q le puse block "titulo" (titulo es la referencia) -->
                         
 {% endblock %}

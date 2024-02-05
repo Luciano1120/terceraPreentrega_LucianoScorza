@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends "AppWeb/padre.html" %}
+
+
+<!--este bloque referenciado dentro del padre en el title de html para poder cambiar el nombre del Html q se visualiza en la solapita-->
+{% block title %} 
+
+leyendoProvs
+                        
+{% endblock %}
+
+
+{% block titulo2 %}
+
     <p>Lectura de Proveedores</p>
         
     {% for x in Supliers %}>    <!-- Supliers viene  de la view leer_prov y es la key del diccionario-->
-    
-    
+
+
     <button>
         <a href="{% url 'EditarProv' x.nombre %}"> Boton Editar Proveedor</a>
         
@@ -25,9 +29,6 @@
 
     </button>
 
-
-
-
     <table> <!--   convierte en tabla el contenido-->
         
         Nombre: {{x.nombre}}  <!-- x.nombre del atributo de la clase-->
@@ -36,11 +37,6 @@
 
     </table>
 
-    
-
     {% endfor %} 
-
-
-
-</body>
-</html>
+                        
+{% endblock %}

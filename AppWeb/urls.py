@@ -22,10 +22,14 @@ urlpatterns = [
     path("resultprov/", resul_prov),
     path("todosprov/", todos_prov),
 
+    #agrega un Item sin Formulario
+    path("agregaItemSimpleSinForm/", agregaItemSimpleSinForm),
+    path("agregaItemConForm/", agregaItemConForm),
+    
     #CRUD Proveedores
     path("leerProv/", leer_prov),
     
-    path("nuevoprov/", agregar_prov),
+    path("agregaProv/", agregar_prov), #es case sensitive. En el navegador lo tengo q escribir tal cual
 
     
     path("elimProv/<provNombre>", eliminar_prov, name="EliminarProv"),  #<provNombre> es el parametro q pide la vista q se pasa en el HTML--el name es para linkear con el buton, es decir para q dicha URL pueda ser llamada desde un Boton

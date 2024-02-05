@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados</title>
 </head>
+
+
 <body>
     
+    <h1> Proveedores Encontrados </h1>    
     
-    <p>Estamos Buscando al Proveedor: {{provs}}</p>  <!-- hacer un metodo str si no comentarlo-->
         
-    {% for x in provs %}>    <!-- provs viene  de la view resultado prov es la key del diccionario-->
+     {% for x in provs %}    <!-- provs viene  de la view resultado prov es la key del diccionario-->
+                            <!-- el for como el if en HTML funcionan con django-->
+    
+    <p>Estamos Buscando al Proveedor: {{x.nombre}}</p>  
         
         <p>Nombre: {{x.nombre}} </p>
         <p>Cuit: {{x.CUIT}}</p>  
         <p>Condicion: {{x.condicion}} </p> <!-- x.nombre del atributo de la clase-->
 
-    {% endfor %} 
+    {% endfor %}
 
+    <img src="https://img.freepik.com/vector-gratis/ilustracion-concepto-empresa_114360-2581.jpg" alt="">  <!-- img permite cargar una imagen //src (source) no permite rutas locales -- alt es mensaje alternativo/ ver alternativa de como hacerlo con alguna ruta local-->
+   
 
 </body>
 </html>
