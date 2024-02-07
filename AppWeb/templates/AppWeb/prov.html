@@ -1,9 +1,26 @@
 {% extends "AppWeb/padre.html" %}
 
-{%load static}
 
-{% block titulo %}
+{% block descrip %}
 
-Vista de Prov
-                        
+
+<ol> <!-- permite una lista ordenada (la enumera) si la quiero desordenada sería <ul> y la marca con un punto, ambas se deben complemetar con li -->
+{% for x in Supliers %}
+
+<li>Nombre Proveedor : {{x.nombre}}</li>  <!-- complementa a la lista para referenciar a cada objeto-->
+<br> <!--permite un salto de linea en cada registro de Prov, no requiere cierre-->
+{% endfor %}
+
+</ol>
+
 {% endblock %}
+
+
+{% block titulo2 %}
+
+<button class="btn btn-primary"> <a class="nav-link" href="{% url 'agrega prov' %}">Agregar Nuevo Prov </a></button>  <!--   agrego un boton con nombre "Agregar Nuevo Prov", y le copie la clase q tenia el boton cerrar Sesion tanto al boton como a la "a" q permite el enlace para el href-  le configuro el href para q lleve a dicha url q es el name  en la url --> 
+
+{% endblock %}
+
+
+

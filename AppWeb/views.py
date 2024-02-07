@@ -12,6 +12,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin  #esto se usa para la vistas de clase para impedir ver info no logueado, pero yo las vistas las hice por funcion por lo q se usa la libreria debajo
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import ListView  #la uso para las vistas de clases,para el read
+from django.views.generic.edit import CreateView, UpdateView, DeleteView  #la uso para las vistas de clases para el create
+
 
 # Create your views here.
 def hora_actual(request):  #el parametro request es obligatorio. Lo exige django en las views por más q no se use
@@ -137,7 +140,7 @@ def agregarImagen(request):
 #vistas de Clases
 
 @login_required  #impide acceder si no estoy logueado
-def prov (request):
+def prov (request):  #esta vista ya no la estoy llamando de ningun lado, ya q estoy llamando a la vista todos_prov
     return render(request, "AppWeb/prov.html")
 
 @login_required
@@ -221,12 +224,23 @@ def leer_prov(request):
 
 
 #muestro a todos los Proveedores
+@login_required
 def todos_prov(request):
         
         proveedores=Proveedor.objects.all()  #obtengo todos los registros de la clase o modelo Proveedor. Guardo en una variable proveedores todos los registros accediendo a la clase Proveedor con el metodo .objects.all()
-        contexto= {"Supliers": proveedores} #guardo los registro en un diccionario
+        contexto= {"Supliers": proveedores} #guardo los registro en un diccionario, ver debajo como sería el diccionario en un ejemplo
 
-        return render(request, "AppWeb/todosLosProvs.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
+        """  es importante la indentation de la triple comilla para q no se error
+            por otro lado vemos como sería el diccionario de la variable contexto
+        {
+    'Supliers': [
+        {'nombre': 'Proveedor A', 'direccion': 'Dirección A', 'telefono': '123-456-789'},
+        {'nombre': 'Proveedor B', 'direccion': 'Dirección B', 'telefono': '987-654-321'}
+    ]
+}
+        """
+
+        return render(request, "AppWeb/prov.html", contexto )  #en este caso guardo la variable contexto (es un diccionario) como argumento q tiene el mismo efecto q ponerlo como argumento como en el caso de arriba result_prov. es lo q le voy a pasar al HTML para q lea a través de la Key del diccionario (Supliers)
 
     
 #alternativa a leer-----------------------------
@@ -291,8 +305,39 @@ def editarProv(request, provNombre):
 
     return render (request, "AppWeb/formEditarProv.html", {"mi_formu": nuevo_formulario, "nombre":provNombre })    
         
+#-------------------------------------------------
+
+#CRUD de Items con vista de clases
+
+class ListaItem(ListView): #creamos una clase q hereda de ListView q es la libreria importada  
+    model= Item  #importamos el modelo/clase pelicula
+    #el html se tiene q llamar igual al objeto instanciado  Item_list.html para q django la renocozca automaticamente y la vincule con la vista basada en clases
+
+class CreaItem(CreateView): #creamos una clase q hereda de ListView q es la libreria importada  
+    model= Item  #importamos el modelo/clase pelicula
+    #el html se tiene q llamar igual al objeto instanciado  Item_list.html para q django la renocozca automaticamente y la vincule con la vista basada en clases
+
+    fields=["id", "nombre", "categoria"]  #campos a agregar registos q vienen del modelo
+    success_url = "/AppWeb/listaItem/"  #necesario para direccionar a q pagina me tiene q llevar
+    #usa el por default el template item_form.html
+
+class ActualizaItem(UpdateView): #creamos una clase q hereda de ListView q es la libreria importada  
+    model= Item  
+
+    fields=["id", "nombre", "categoria"]  #campos a agregar registos q vienen del modelo
+    success_url = "/AppWeb/listaItem/"  #necesario para direccionar a q pagina me tiene q llevar
+    #usa el mismo template del create
+
+class BorrarItem(DeleteView): #creamos una clase q hereda de ListView q es la libreria importada  
+    model= Item  
+
+    success_url = "/AppWeb/listaItem/"  #necesario para direccionar a q pagina me tiene q llevar
+    #usa el por default el template item_confirm_delete.html
 
 
+
+
+#--------------------------------------------------
 def about(request):
     return render(request, "AppWeb/about.html")     
 

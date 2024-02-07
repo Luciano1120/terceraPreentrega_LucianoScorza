@@ -8,8 +8,14 @@ leyendoProvs
                         
 {% endblock %}
 
+{% block titulo %}
 
-{% block titulo2 %}
+Editamos y eliminamos Proveedores
+
+{% endblock %}
+
+
+{% block descrip %}
 
     <p>Lectura de Proveedores</p>
         
@@ -17,14 +23,14 @@ leyendoProvs
 
 
     <button>
-        <a href="{% url 'EditarProv' x.nombre %}"> Boton Editar Proveedor</a>
+        <a href="{% url 'EditarProv' x.nombre %}"> Editar Proveedor</a>
         
 
     </button>
 
     <button>
         
-        <a href="{% url 'EliminarProv' x.nombre %}"> Boton Eliminar Proveedor</a> <!--la "a" del principio hace un hipervinculo, luego el Buton lo hace boton-->
+        <a href="{% url 'EliminarProv' x.nombre %}"> Eliminar Proveedor</a> <!--la "a" del principio hace un hipervinculo, luego el Buton lo hace boton-->
         <!-- en la url se le da el parametro a eliminar-->
 
     </button>

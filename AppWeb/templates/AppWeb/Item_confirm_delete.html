@@ -1,0 +1,19 @@
+{% extends "AppWeb/padre.html" %}
+
+
+
+
+{% block titulo %}
+  <!-- es un Html de confirmacion de borrado -->
+<form action="" method="POST"> {% csrf_token %}>
+
+  <p>Estas seguro de borar el item:{{object}} </p>
+    <input type="submit" value="borrar">
+
+</form>
+
+{% endblock %}
+
+
+
+

@@ -64,12 +64,17 @@
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">
-                            
+                           
                         {% block titulo %} <!-- titulo es el alias q le doy para llamarlo en la herencia-->
                         <!-- este bloque permite cambiar algunos objetos de algun otro HTML q herede -->
                         {% endblock %}
                         
                         </h1>
+                        {% block contenidoCentral %}  <!-- fui probando con la palabra hola donde quedaba mejor y viendo como salia para elegir este lugar-->
+                        
+
+                        {% endblock %}
+
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">
                             {% block titulo2 %} 
                             {% endblock %}
