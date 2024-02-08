@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'acercaDeMi' %}">About</a></li>  <!-- en url se tiene q escribir el name del url.py-->
-                        <li class="nav-item"><a class="nav-link" href="{% url 'item' %}">Items</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'b_item' %}">Items</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cliente' %}">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'prov' %}">Proveedores</a></li>
                         
@@ -92,8 +92,8 @@
         <section class="signup-section" id="signup">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                    <!--<div class="col-md-10 col-lg-8 mx-auto text-center">-->
+                        <!--<i class="far fa-paper-plane fa-2x mb-2 text-white"></i>-->
                         
                         <!-- * * * * * * * * * * * * * * *-->
                         <!-- * * SB Forms Contact Form * *-->
@@ -104,7 +104,7 @@
                         <!-- to get an API token!-->
                         <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
                             <!-- Email address input-->
-                            <div class="row input-group-newsletter">
+                            <!--<div class="row input-group-newsletter">-->
                             
                                 {% block descrip %} <!-- titulo es el alias q le doy para llamarlo en la herencia-->
                                 <!-- este bloque permite cambiar algunos objetos de algun otro HTML q herede -->
@@ -112,14 +112,14 @@
 
 
                             </div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
+                            <!--<div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>-->
+                            <!--<div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div> -->
                             <!-- Submit success message-->
                             <!---->
                             <!-- This is what your users will see when the form-->
                             <!-- has successfully submitted-->
                             <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3 mt-2 text-white">
+                                <!--<div class="text-center mb-3 mt-2 text-white">-->
                                     <div class="fw-bolder">Form submission successful!</div>
                                     To activate this form, sign up at
                                     <br />
