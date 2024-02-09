@@ -131,3 +131,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
+#lo agrego yo para redirecciona paginas q dan error por no estar logueado (es decir donde uso decoradores ( para vistas por fucnion) o mixin (para vista por clases)
+LOGIN_URL = "/AppWeb/" #debe de tener el slash inicial. Es para q no de error cuando se aplica un decorador de @login_required al boton para q lo mande a la pag de inicio. aunqe en mi caso configuré para q no aparezcan los botones si no inicio sesion
+

@@ -18,9 +18,10 @@ class ProveedorFormulario(forms.Form):
 
 
 class UsuarioRegistro(UserCreationForm):
-#para agregar mas campos al registro
+#para agregar mas campos al registro, o editar los labels
+    username= forms.CharField(label= "Ingrese su Nombre de Usuario")
     email = forms.EmailField()
-    password1 = forms.CharField(label= "Contraseña", widget= forms.PasswordInput)
+    password1 = forms.CharField(label= "Contraseña", widget= forms.PasswordInput, help_text= "mas de 6 Caracteres") #el help text es para q salga auna ayuda memoria
     password2 = forms.CharField(label= "Repetir Contraseña", widget= forms.PasswordInput)
 
     class Meta:

@@ -9,8 +9,8 @@ from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarU
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 
-from django.contrib.auth.mixins import LoginRequiredMixin  #esto se usa para la vistas de clase para impedir ver info no logueado, pero yo las vistas las hice por funcion por lo q se usa la libreria debajo
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin  #esto se usa para la vistas de clase para impedir ver info no logueado, es como el login_required pero para clases
+from django.contrib.auth.decorators import login_required #permite q solo se acceda a esa funcion vinculada a un boton estando logueado
 
 from django.views.generic import ListView  #la uso para las vistas de clases,para el read
 from django.views.generic.edit import CreateView, UpdateView, DeleteView  #la uso para las vistas de clases para el create
@@ -75,7 +75,7 @@ def registro(request):
      return render(request, "AppWeb/registro.html", {"formulario":form})
     
 
-@login_required #para q solo se puede entrar si se inicio cesion
+@login_required #es un decorador , para q solo se puede entrar si se inicio cesion
 def editarUsuario(request):
 
     usuario=request.user
@@ -309,9 +309,11 @@ def editarProv(request, provNombre):
 
 #CRUD de Items con vista de clases
 
-class ListaItem(ListView): #creamos una clase q hereda de ListView q es la libreria importada  
+
+class ListaItem(LoginRequiredMixin,ListView): #creamos una clase q hereda de ListView q es la libreria importada  / LoginRequiredMixin es para q no permita el acceso al boton si no inicio sesion
     model= Item  #importamos el modelo/clase pelicula
     #el html se tiene q llamar igual al objeto instanciado  Item_list.html para q django la renocozca automaticamente y la vincule con la vista basada en clases
+
 
 class CreaItem(CreateView): #creamos una clase q hereda de ListView q es la libreria importada  
     model= Item  #importamos el modelo/clase pelicula
@@ -338,6 +340,7 @@ class BorrarItem(DeleteView): #creamos una clase q hereda de ListView q es la li
 
 
 #--------------------------------------------------
+
 def about(request):
     return render(request, "AppWeb/about.html")     
 

@@ -28,13 +28,20 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'acercaDeMi' %}">About</a></li>  <!-- en url se tiene q escribir el name del url.py-->
+                        
+                        
+                        
+                        {% if request.user.is_authenticated %}
+                        <!-- si el usuario inicia sesion le muuestro estos botones si no no se los muestro-->
+                        <!--los botones aparecen en la web en el orden dado-->
                         <li class="nav-item"><a class="nav-link" href="{% url 'b_item' %}">Items</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cliente' %}">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'prov' %}">Proveedores</a></li>
                         
-                        {% if request.user.is_authenticated %}
-
+                        
                         <p style="color: white"> Hola {{user.username}} </p>  <!-- si tiene sesion iniciada q aparezca el nommbre del usuario logueado // la doble llave {{variable}} se usa para variables--> 
+
+                            
 
                         {% with user.avatar_set.first as miAvatar %}
                         {% if miAvatar %}
@@ -156,7 +163,7 @@
                                 <i class="fas fa-envelope text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Email</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="#!">lucianoscorza@hotmail.com</a></div>
+                                <div class="small text-black-50">lucianoscorza@hotmail.com</a></div> <!--tenia esto <a href="#!"> para poder direccionar a ennviar un mail pero lo saque, sería bueno ver como configurarlo -->
                             </div>
                         </div>
                     </div>
@@ -172,8 +179,8 @@
                     </div>
                 </div>
                 <div class="social d-flex justify-content-center">
-                    <a class="mx-2" href="#!"><i class="fab fa-linkedin"></i></a> <!-- le cambie yo de twiter a linkedin y cambio el logo-->
-                    <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+                    <a class="mx-2" href="//www.linkedin.com/in/luciano-scorza"><i class="fab fa-linkedin"></i></a> <!-- le cambie yo de twiter a linkedin y cambio el logo- por otro lado le puse mi url de linkedin y le tengo q anteponer // dobre slash-->
+                    <a class="mx-2" href="https://1drv.ms/b/s!ApP_8E9v9OFolDqQ40bvGBjnRl91?e=E8JVxz"><i class="fab fa-CV"></i></a> <!-- en este caso puse mi enlace del CV y no hace falta poner la doble //-->
                 </div>
             </div>
         </section>
