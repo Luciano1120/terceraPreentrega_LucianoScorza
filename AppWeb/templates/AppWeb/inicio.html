@@ -10,15 +10,25 @@ inicio
 {% endblock %}
 
 
-{% block titulo %}
-
-{{mensaje}}  <!-- variable del mensaje cuando inicia sesion-->
-                        
-{% endblock %}
 
 {% block titulo2 %}
 
-Bienvenido a Mi Pagina Web
+
+Bienvenido/a {{mensaje}} a mi Pagina Web   <!-- variable del mensaje cuando inicia sesion seguido de un string-->
+<button class="btn btn-primary"> <a class="nav-link" href="{% url 'Agregar Imagen' %}">Modificar Foto de Perfil </a></button>  
+                        
+{% endblock %}
+
+
+{% block descrip %}
+
+<h1>Nuestra Herramienta te permitirá Gestionar tus: 
+     <ul>
+        <br>   Clientes
+        <br> Proveedores 
+        <br>Productos que comercialices 
+    </ul>
+</h1> 
                         
 {% endblock %}
 

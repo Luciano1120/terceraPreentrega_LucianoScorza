@@ -3,17 +3,18 @@
 {%load static}
 
 
-{% block description %}
+{% block titulo2 %}
 
-<form action="" method="POST">  {% csrf_token %}
+<form action="" method="POST" enctype="multipart/form-data">  <!-- se agrega enctype por el manejo de archivos-->
+    {% csrf_token %}
 
-    <p>
+    
 
-    {{form.as_p}}
+    {{formu.as_p}}
 
-    </p>
+    
 
-    <input type="submit", value="Subir Imagen", style="color: red">
+    <input type="submit", value="Subir Imagen">
 
 
 </form>

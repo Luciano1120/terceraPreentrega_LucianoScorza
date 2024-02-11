@@ -21,7 +21,7 @@ class UsuarioRegistro(UserCreationForm):
 #para agregar mas campos al registro, o editar los labels
     username= forms.CharField(label= "Ingrese su Nombre de Usuario")
     email = forms.EmailField()
-    password1 = forms.CharField(label= "Contraseña", widget= forms.PasswordInput, help_text= "mas de 6 Caracteres") #el help text es para q salga auna ayuda memoria
+    password1 = forms.CharField(label= "Contraseña", widget= forms.PasswordInput, help_text= "al menos 8 Caracteres") #el help text es para q salga auna ayuda memoria
     password2 = forms.CharField(label= "Repetir Contraseña", widget= forms.PasswordInput)
 
     class Meta:
@@ -40,12 +40,12 @@ class formularioEditarUsuario(UserCreationForm):
         fields=["email", "first_name","last_name","password1","password2" ] #no requiere editar el username, ya q no es lo q se acostumbra
 
 
-class AvatarFormulario(forms.Form):  #en vez de .Form uso .ModelForm
+class AvatarFormulario(forms.ModelForm):  #en vez de .Form uso .ModelForm
 
     class Meta:
 
         model = avatar  #es el modelo importado
-        fields=["user", "imagen"]
+        fields=[ "imagen"]
 
     
 

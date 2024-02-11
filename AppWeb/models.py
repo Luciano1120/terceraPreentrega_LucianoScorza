@@ -32,10 +32,14 @@ class Proveedor(models.Model):
     CUIT=models.CharField(max_length =10, default='000')
     condicion=models.CharField(max_length=30)
 
-
+#es necesario q cada modelo q se cree agregarlo en admin.py
 class avatar(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE) #lo vinculo con la Clase User, y on delete Cascade es para q si se elimina el usuario se elimine el avatar
     imagen = models.ImageField(upload_to="avatares", null=True , blank=True) # ya q no todos los usuarios va a tener Avatares por eso null y blank = True
+
+    def __str__(self):
+        return f"{self.usuario} --- {self.imagen}"
+                    
 
 
 

@@ -2,7 +2,7 @@ from django.http import HttpResponse #lo use solo para probar la hora actual. Pe
 import datetime as dt #lo use solo para probar la hora actual
 
 from django.shortcuts import render 
-from AppWeb.models import Proveedor, Cliente, Item # importe los modelos de models.py
+from AppWeb.models import Proveedor, Cliente, Item, avatar # importe los modelos de models.py
 from AppWeb.forms import ProveedorFormulario, UsuarioRegistro, formularioEditarUsuario, AvatarFormulario #importa los formularios
 
 #librerias necesarias para el manejo de sesion
@@ -11,6 +11,8 @@ from django.contrib.auth import login, authenticate, logout
 
 from django.contrib.auth.mixins import LoginRequiredMixin  #esto se usa para la vistas de clase para impedir ver info no logueado, es como el login_required pero para clases
 from django.contrib.auth.decorators import login_required #permite q solo se acceda a esa funcion vinculada a un boton estando logueado
+
+from django.contrib.auth.models import User #para traer la clase usuario para el avatar
 
 from django.views.generic import ListView  #la uso para las vistas de clases,para el read
 from django.views.generic.edit import CreateView, UpdateView, DeleteView  #la uso para las vistas de clases para el create
@@ -46,7 +48,7 @@ def inicioSesion(request):
                if user:
                     login(request, user)
 
-                    return render(request, "AppWeb/inicio.html", {"mensaje":f"Bienvenido {user}"})
+                    return render(request, "AppWeb/inicio.html", {"mensaje":f"Usuario {user}"})
                else:
                      return render(request, "AppWeb/inicio.html", {"mensaje":"Datos Incorrectos"}) 
                
@@ -66,7 +68,7 @@ def registro(request):
             
             username= form.cleaned_data["username"]
             form.save()
-            return render (request, "AppWeb/inicio.html", {"mensaje":"Usuario Creado"})
+            return render (request, "AppWeb/inicio.html", {"mensaje":f"Usuario {username}"})
           
      else:
 
@@ -112,6 +114,7 @@ def cerrarSesion(request):
     return render (request, "appweb/logout.html")
 
 #agregar Avatares (vista para subir imagenes)
+
 @login_required
 def agregarImagen(request):
      
@@ -122,17 +125,18 @@ def agregarImagen(request):
           if miFormulario.is_valid():
                
                informacion= miFormulario.cleaned_data
+               usuario_actual= User.objects.get(username=request.user)
                
-               avatar= avatar(user=request.user, imagen=informacion['imagen'])
-               avatar.save()
+               avatar_nuevo= avatar(usuario=usuario_actual, imagen=informacion["imagen"])
+               avatar_nuevo.save()
 
                return render(request, "AppWeb/inicio.html")
           
      else:
           
-              miFormulario =AvatarFormulario() #si no q me mande el Formulario Vacio
+          miFormulario =AvatarFormulario() #si no q me mande el Formulario Vacio
               
-     return render(request, "AppWeb/agregarImg.html", {'form':miFormulario})
+     return render(request, "AppWeb/agregarImg.html", {'formu':miFormulario})
 
 
 
@@ -317,7 +321,7 @@ class ListaItem(LoginRequiredMixin,ListView): #creamos una clase q hereda de Lis
 
 class CreaItem(CreateView): #creamos una clase q hereda de ListView q es la libreria importada  
     model= Item  #importamos el modelo/clase pelicula
-    #el html se tiene q llamar igual al objeto instanciado  Item_list.html para q django la renocozca automaticamente y la vincule con la vista basada en clases
+    
 
     fields=["id", "nombre", "categoria"]  #campos a agregar registos q vienen del modelo
     success_url = "/AppWeb/listaItem/"  #necesario para direccionar a q pagina me tiene q llevar

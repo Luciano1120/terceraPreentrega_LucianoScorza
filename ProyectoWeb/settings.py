@@ -126,9 +126,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#esto lo hice para sincronizar con la carpeta de avantares (media)
+#esto lo hice para sincronizar con la carpeta de avantares (media), esto se debe hacer antes de hacer las migraciones de dicho MOdelo 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")#BASE_DIR está arriba y es donde vincula con la carpeta del Proyecto
 
 
 #lo agrego yo para redirecciona paginas q dan error por no estar logueado (es decir donde uso decoradores ( para vistas por fucnion) o mixin (para vista por clases)

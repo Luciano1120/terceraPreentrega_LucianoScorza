@@ -27,7 +27,7 @@ urlpatterns = [
     path("agregaItemConForm/", agregaItemConForm),
     
     #CRUD Proveedores con vistas basadas en funciones
-    path("leerProv/", leer_prov),
+    path("leerProv/", leer_prov, name="editProv"),
     
     path("agregaProv/", agregar_prov, name="agrega prov"), #es case sensitive. En el navegador lo tengo q escribir tal cual- el name se lo doy para llamarlo desde el Boton del html prov.html "Agregar Nuevo Prov"
 
@@ -39,7 +39,7 @@ urlpatterns = [
     #CRUD Item con vistas basados en Clase
     path("listaItem/", ListaItem.as_view(), name="b_item"), # a diferencia de las views basadas en funciones de agrega el nombre de la clase.as_view()
     path("agregaItem/", CreaItem.as_view(), name="a_item"), 
-    path("actualizaItem/<int:pk>", ActualizaItem.as_view()),  #le tengo q poner el paramentro del id del Item en este caso el id 3 http://127.0.0.1:8000/AppWeb/actualizaItem/3
+    path("actualizaItem/<int:pk>", ActualizaItem.as_view(), name= "e_item"),  #le tengo q poner el paramentro del id del Item en este caso el id 3 http://127.0.0.1:8000/AppWeb/actualizaItem/3
     path("borraItem/<int:pk>", BorrarItem.as_view()),
 
     
